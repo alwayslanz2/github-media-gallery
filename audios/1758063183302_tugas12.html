@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum Ke-11 M Adlan Ali S.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 1s ease-in; }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .progress-bar {
+            width: 300px;
+            height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: white;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+        
+        .section-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .external-link {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .external-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen text-white">
+        <div class="floating">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+        </div>
+        <h1 class="text-3xl font-bold mt-4 mb-2 animate-pulse">11 TKJ 3 DBonejo</h1>
+        <p class="mb-6">Memuat konten...</p>
+        <div class="loader"></div>
+        <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="opacity-0 transition-opacity duration-500">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-800 to-blue-600 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                        </svg>
+                        <div>
+                            <h1 class="text-2xl font-bold">XI TKJ 3</h1>
+                            <p class="text-sm opacity-80">Teknik Jaringan dan Komputer</p>
+                        </div>
+                    </div>
+                    <nav class="flex space-x-1 md:space-x-4">
+                        <a href="#" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Beranda</a>
+                        <a href="#" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Tugas</a>
+                        <a href="#" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Tutorial</a>
+                        <a href="#" class="px-3 py-2 rounded hover:bg-blue-700 transition duration-300">Tentang</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Breadcrumb -->
+        <div class="bg-blue-50 py-3">
+            <div class="container mx-auto px-4">
+                <div class="text-sm text-gray-600">
+                    <a href="#" class="text-blue-600 hover:underline">Beranda</a> &raquo; 
+                    <a href="#" class="text-blue-600 hover:underline">Tugas</a> &raquo; 
+                    <span class="text-gray-800">Laporan tugas ke-11</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Article Content -->
+                <article class="lg:w-2/3 bg-white rounded-lg shadow-md overflow-hidden hover-scale transition-all duration-300">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full uppercase font-semibold tracking-wide">Laporan</span>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full ml-2">TKJ</span>
+                            </div>
+                            <span class="text-sm text-gray-500">16 September 2025</span>
+                        </div>
+                        <div class="text-center text-gray-800 mb-4">                        <h1 class="text-3xl font-bold text-gray-800 mb-4">Mengelola Layanan (Service) dan Mengamankan Akses Mikrotik</h1>
+                        </div>
+
+                                                        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Laporan Tugas ke-11</h2>
+                        
+                        <div class="text-center text-gray-600 mb-6">
+                            <p class="text-xl font-semibold">JUDUL LAPORAN</p>
+                            <p>Oleh: M Adlan Ali S.</p>
+                            <p>Kelas: XI TJKT 3</p>
+                            <p>Sekolah: Dwija Bhakti 1 Jombang</p>
+                            <img src="https://files.catbox.moe/356slt.png" alt="Topologi Bus" class="section-image mx-auto">
+                        </div>
+                        
+                        <div class="prose max-w-none mb-8">
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+
+                                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">Gambar Topologi
+                                </h3>
+                                                                <img src="https://files.catbox.moe/8n6j93.jpg" alt="topologi" class="section-image">
+                                                                <p class="text-gray-700 mb-4 text-sm">Gambar 1 : Topologi
+                                                                <p class="text-gray-700 mb-4 text-sm">Sumber foto: M Adlan Ali
+                                
+                                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">1. Pengenalan NTP (Network Time Protocol)</h3>
+
+                                <p class="text-gray-700 mb-4">Menurut dokumentasi MikroTik, NTP (Network Time Protocol) adalah sebuah layanan jaringan yang berfungsi untuk menjaga keseragaman waktu pada semua perangkat jaringan. NTP bekerja dengan cara menyesuaikan jam sistem perangkat terhadap waktu global yang bersumber dari referensi terpercaya, seperti NTP server publik atau GPS clock. Sinkronisasi waktu ini sangat krusial karena memengaruhi banyak aspek, misalnya keakuratan pencatatan log aktivitas jaringan, konsistensi dalam pengaturan jadwal otomatis, hingga penerapan kebijakan keamanan yang berbasis perbedaan waktu.</p>
+                                
+                                <p class="text-gray-700 mb-4">Menurut Tech@Layer-x, NTP merupakan protokol standar yang umum dipakai pada perangkat jaringan seperti router, switch, server, hingga komputer client. Tanpa adanya NTP, jam internal perangkat dapat mengalami time drift atau pergeseran waktu secara bertahap, yang menimbulkan masalah serius, seperti ketidaksesuaian catatan log, kegagalan autentikasi berbasis waktu, maupun gangguan komunikasi antar server yang membutuhkan presisi waktu tinggi. Dengan memanfaatkan NTP, perangkat dapat memperoleh referensi waktu yang stabil dari sumber terpercaya, sehingga semua sistem dalam jaringan tetap berjalan dengan sinkron.</p>
+
+                                <p class="text-gray-700 mb-4">Dari beberapa pendapat tersebut dapat disimpulkan bahwa NTP adalah protokol fundamental yang menjamin kesamaan waktu di seluruh perangkat jaringan. Dengan adanya sinkronisasi waktu, administrator dapat memastikan keakuratan log aktivitas, keberhasilan autentikasi berbasis waktu, serta stabilitas komunikasi antar perangkat yang membutuhkan ketepatan waktu tinggi.</p>
+
+                                                                <img src="https://files.catbox.moe/2c980j.jpg" alt="ip address" class="section-image">
+                                
+                         <p class="text-gray-700 mb-4 text-sm">gambar 2   
+                                
+                                <p class="text-gray-700 mb-4 text-sm">Sumber foto: m adlan ali</p>
+                                
+
+                                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">2. Mengonfigurasi Dasar NTP Client</h3>
+
+                                <p class="text-gray-700 mb-4">Menurut dokumentasi resmi MikroTik, pada RouterOS versi 7, konfigurasi NTP Client dapat dilakukan dengan cara mengaktifkan parameter enabled=yes, kemudian menambahkan server sinkronisasi waktu, baik berupa alamat IP maupun DNS. RouterOS juga sudah mendukung fitur failover otomatis, sehingga apabila server utama tidak merespons, sistem akan otomatis berpindah ke server cadangan.</p>
+                                
+                                <p class="text-gray-700 mb-4">Menurut Tech@Layer-x, langkah awal dalam konfigurasi NTP Client adalah dengan menentukan zona waktu sesuai lokasi perangkat agar hasil sinkronisasi sesuai dengan waktu lokal. Setelah itu, NTP Client perlu diaktifkan, kemudian ditambahkan daftar server NTP menggunakan perintah /system ntp client servers add, sehingga router memiliki lebih dari satu sumber sinkronisasi untuk menjaga akurasi waktu.</p>
+
+                                <p class="text-gray-700 mb-4">Dari beberapa pendapat tersebut dapat disimpulkan bahwa konfigurasi NTP Client sebaiknya dimulai dengan mengatur zona waktu perangkat, lalu mengaktifkan layanan NTP Client, dan menambahkan lebih dari satu server agar sinkronisasi waktu berjalan stabil, akurat, serta tetap berfungsi meskipun salah satu server tidak tersedia.</p>
+
+                                <h4 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Langkah-Langkah Konfigurasi NTP Client</h4>
+                                <p class="text-gray-700 mb-4">1. Mengaktifkan NTP Client dan Menentukan Server Utama & Cadangan<br>
+                                Masukkan perintah berikut pada CLI:<br>
+                                /system ntp client set enabled=yes primary-ntp=203.160.128.59 secondary-ntp=203.89.200.1<br><br>
+                                enabled=yes → mengaktifkan layanan NTP Client<br>
+                                primary-ntp → server utama yang digunakan untuk sinkronisasi waktu<br>
+                                secondary-ntp → server cadangan jika server utama tidak merespons</p>
+                                
+                                <p class="text-gray-700 mb-4">2. Mengecek Status Konfigurasi NTP Client<br>
+                                Gunakan perintah berikut untuk memastikan bahwa konfigurasi sudah berjalan dengan benar:<br>
+                                /system ntp client print<br><br>
+                                Dari hasil perintah ini akan terlihat apakah NTP Client sudah aktif, serta server mana yang sedang digunakan untuk sinkronisasi waktu.</p>
+                                
+                                                                <img src="https://files.catbox.moe/usd8rr.jpg" alt="ip address" class="section-image">
+                                
+                                <p class="text-gray-700 mb-4 text-sm">gambar 3
+                                
+                                <p class="text-gray-700 mb-4 text-sm">Sumber foto: m adlan ali</p>
+                                
+
+                                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">3. Konfigurasi Time Zone dan Format Waktu</h3>
+
+                                <p class="text-gray-700 mb-4">Menurut sumber Microsoft, pengaturan zona waktu dan format waktu pada Windows 10 maupun Windows 11 dapat dilakukan melalui menu Pengaturan → Waktu & Bahasa → Tanggal & Waktu. Di sana, pengguna dapat memilih opsi "Atur waktu secara otomatis" atau "Atur zona waktu secara otomatis". Jika ingin melakukan pengaturan secara manual, opsi otomatis bisa dinonaktifkan, lalu pengguna dapat mengubah tanggal dan waktu secara langsung melalui tombol Ubah atau memilih zona waktu yang sesuai dari menu dropdown. Selain itu, Windows juga menyediakan pengaturan tambahan seperti menyesuaikan waktu musim panas (daylight saving time), menampilkan detik pada system tray, serta menentukan format tanggal dan waktu yang ditampilkan. Dengan demikian, pengguna bisa menyesuaikan tampilan jam sesuai kebutuhan.</p>
+                                
+                                <p class="text-gray-700 mb-4">Menurut tutorial dari Hostinger, di sistem operasi Linux Ubuntu terdapat dua cara utama dalam mengatur zona waktu, yaitu menggunakan antarmuka grafis (GUI) maupun command-line (CLI/terminal). Jika melalui GUI, pengguna cukup membuka Settings → Date & Time, lalu menonaktifkan opsi zona waktu otomatis. Setelah itu, zona waktu bisa dipilih secara manual melalui peta interaktif atau fitur pencarian. Sementara itu, untuk pengguna yang lebih terbiasa dengan terminal, tersedia dua metode: pertama, menggunakan tzselect untuk perubahan sementara (akan hilang setelah sistem direstart); kedua, dengan timedatectl untuk konfigurasi permanen. Misalnya, menjalankan perintah sudo timedatectl set-timezone Asia/Jakarta akan langsung mengubah zona waktu sistem ke WIB. Untuk memastikan hasilnya, pengguna bisa mengetikkan perintah timedatectl untuk melihat status konfigurasi waktu saat ini.</p>
+
+                                <p class="text-gray-700 mb-4">Dari beberapa pendapat tersebut dapat disimpulkan bahwa pengaturan zona waktu dan format waktu dapat dilakukan dengan mudah, baik melalui antarmuka grafis maupun command-line. Pemilihan metode tentu tergantung sistem operasi dan preferensi pengguna, namun keduanya sama-sama sederhana, praktis, dan cepat.</p>
+
+                                <h4 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Langkah Konfigurasi Zona Waktu di MikroTik (via CLI):</h4>
+                                <p class="text-gray-700 mb-4">1. Jalankan perintah untuk masuk ke menu pengaturan waktu:<br>
+                                /system clock</p>
+                                
+                                <p class="text-gray-700 mb-4">2. Atur zona waktu sesuai lokasi, misalnya untuk Jakarta (WIB):<br>
+                                set time-zone-name=Asia/Jakarta</p>
+                                
+                                <p class="text-gray-700 mb-4">3. Cek hasil konfigurasi apakah sudah sesuai:<br>
+                                /system clock print</p>
+                                
+                                <p class="text-gray-700 mb-4">Dengan langkah ini, router MikroTik akan menampilkan waktu lokal yang benar, sehingga log dan jadwal (scheduler) bisa sinkron sesuai zona waktu setempat.</p>
+                                
+                                                                <img src="https://files.catbox.moe/kdev9s.jpg" alt="ip address" class="section-image">
+                                
+                                <p class="text-gray-700 mb-4 text-sm">gambar 4
+                                
+                                <p class="text-gray-700 mb-4 text-sm">Sumber foto: m adlan ali</p>
+                                
+                                
+
+                                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">4. Troubleshooting</h3>
+
+                                <p class="text-gray-700 mb-4">Menurut dokumentasi MikroTik, proses troubleshooting NTP (Network Time Protocol) biasanya dimulai dengan memeriksa apakah router masih bisa menjangkau server NTP yang ditentukan. Jika konektivitas bermasalah, langkah berikutnya adalah mengecek konfigurasi DNS untuk memastikan nama domain server NTP bisa diresolusi dengan benar. Jika server utama tidak merespons, pengguna disarankan mengganti atau menambahkan server lain sebagai cadangan agar sinkronisasi waktu tetap berjalan.</p>
+                                
+                                <p class="text-gray-700 mb-4">Menurut Tech@Layer-x, proses uji konektivitas bisa dilakukan dengan perintah /tool ping langsung ke server NTP, baik menggunakan alamat IP maupun domain. Setelah itu, DNS perlu dipastikan berfungsi normal dengan cara melakukan ping ke nama domain umum, misalnya google.com. Selain itu, penting juga menambahkan server cadangan (secondary NTP server) agar sinkronisasi waktu tidak terganggu jika server utama gagal diakses.</p>
+
+                                <p class="text-gray-700 mb-4">Dari beberapa pendapat tersebut, dapat disimpulkan bahwa troubleshooting NTP pada MikroTik bukan hanya memeriksa konektivitas internet, tetapi juga memastikan DNS berjalan baik, serta menambahkan server cadangan untuk menjaga kestabilan sinkronisasi waktu.</p>
+
+                                <h4 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Langkah-Langkah Troubleshooting NTP di MikroTik</h4>
+                                <p class="text-gray-700 mb-4">1. Cek konektivitas internet<br>
+                                /tool ping 8.8.8.8<br><br>
+                                Jika ada reply, artinya koneksi internet normal.<br>
+                                Jika request timeout, berarti ada masalah pada koneksi fisik atau konfigurasi gateway.</p>
+                                
+                                <p class="text-gray-700 mb-4">2. Cek DNS<br>
+                                /ip dns print<br>
+                                /tool ping google.com<br><br>
+                                Pastikan DNS server sudah terkonfigurasi.<br>
+                                Jika domain bisa diping, berarti DNS berjalan dengan baik.<br>
+                                Jika gagal, periksa pengaturan DNS atau ganti dengan DNS publik (misalnya 8.8.8.8 atau 1.1.1.1).</p>
+                                
+                                <p class="text-gray-700 mb-4">3. Tambahkan server NTP cadangan<br>
+                                /system ntp client set enabled=yes primary-ntp=203.160.128.3 secondary-ntp=202.162.32.12<br><br>
+                                primary-ntp = server utama.<br>
+                                secondary-ntp = server cadangan, dipakai otomatis jika server utama gagal.</p>
+                                
+                                <p class="text-gray-700 mb-4">4. Verifikasi status NTP client<br>
+                                /system ntp client print<br><br>
+                                Untuk RouterOS v6, cukup melihat status pada menu print.<br>
+                                Untuk RouterOS v7, bisa lebih detail dengan:<br>
+                                /system ntp client status<br><br>
+                                → Akan terlihat apakah sinkronisasi berhasil, jam sudah sesuai, dan ke server mana router terhubung.</p>
+                                
+                                                                <img src="https://files.catbox.moe/aazgmi.jpg" alt="ip address" class="section-image">
+                                
+                                <p class="text-gray-700 mb-4 text-sm">gambar 5
+                                
+                                <p class="text-gray-700 mb-4 text-sm">Sumber foto: m adlan ali</p>
+                                
+
+                                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">5. Konfigurasi NTP Server</h3>
+
+                                <p class="text-gray-700 mb-4">Menurut dokumentasi MikroTik, selain berfungsi sebagai client, perangkat MikroTik juga dapat dikonfigurasi sebagai NTP Server untuk menyediakan layanan sinkronisasi waktu bagi perangkat lain dalam jaringan lokal. Dengan mengaktifkan mode server, router dapat memberikan waktu yang akurat kepada client-client di jaringan internal, sehingga semua perangkat memiliki waktu yang seragam.</p>
+                                
+                                <p class="text-gray-700 mb-4">Menurut Tech@Layer-x, konfigurasi NTP Server pada MikroTik memungkinkan administrator untuk membuat sumber waktu lokal yang dapat diandalkan, terutama jika koneksi internet terputus. Server NTP lokal ini akan tetap menyediakan waktu yang relatif akurat meskipun tidak dapat melakukan sinkronisasi dengan server NTP publik.</p>
+
+                                <p class="text-gray-700 mb-4">Dari beberapa pendapat tersebut dapat disimpulkan bahwa konfigurasi NTP Server pada MikroTik memberikan fleksibilitas dalam mengelola waktu jaringan, memastikan konsistensi waktu bahkan dalam kondisi koneksi internet terbatas, serta mengurangi ketergantungan pada server eksternal.</p>
+
+                                <h4 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Langkah-Langkah Konfigurasi NTP Server di MikroTik:</h4>
+                                <p class="text-gray-700 mb-4">1. Aktifkan mode NTP Server:<br>
+                                /system ntp server set enabled=yes</p>
+                                
+                                <p class="text-gray-700 mb-4">2. Tentukan interface yang akan melayani request NTP:<br>
+                                /system ntp server set interface=ether1</p>
+                                
+                                <p class="text-gray-700 mb-4">3. Verifikasi status NTP Server:<br>
+                                /system ntp server print</p>
+                                
+                                <p class="text-gray-700 mb-4">Dengan konfigurasi ini, perangkat MikroTik akan berfungsi sebagai NTP Server yang dapat diakses oleh client dalam jaringan lokal.</p>
+                                
+                                                                <img src="https://files.catbox.moe/nekv03.jpg" alt="ip address" class="section-image">
+                                
+                                <p class="text-gray-700 mb-4 text-sm">gambar 6
+                                
+                               <p class="text-gray-700 mb-4 text-sm">Sumber foto: m adlan ali </p>
+
+                                <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2">6. Monitoring dan Maintenance NTP</h3>
+
+                                <p class="text-gray-700 mb-4">Menurut dokumentasi MikroTik, monitoring status NTP client dan server dapat dilakukan dengan perintah /system ntp client monitor dan /system ntp server monitor. Perintah ini memberikan informasi detail tentang status sinkronisasi, server yang digunakan, offset waktu, dan informasi lainnya yang berguna untuk memastikan NTP berfungsi dengan baik.</p>
+                                
+                                <p class="text-gray-700 mb-4">Menurut Tech@Layer-x, maintenance rutin pada konfigurasi NTP meliputi pemantauan log sistem untuk mendeteksi masalah sinkronisasi, memperbarui daftar server NTP jika diperlukan, serta memastikan bahwa zona waktu tetap sesuai dengan lokasi geografis perangkat.</p>
+
+                                <p class="text-gray-700 mb-4">Dari beberapa pendapat tersebut dapat disimpulkan bahwa monitoring dan maintenance rutin pada konfigurasi NTP sangat penting untuk memastikan akurasi waktu dan keandalan sistem. Dengan pemantauan yang teratur, administrator dapat mendeteksi dan menyelesaikan masalah sebelum berdampak pada operasional jaringan.</p>
+
+                                <h4 class="text-lg font-semibold text-gray-800 mt-4 mb-2">Langkah-Langkah Monitoring NTP:</h4>
+                                <p class="text-gray-700 mb-4">1. Monitor status NTP Client:<br>
+                                /system ntp client monitor</p>
+                                
+                                <p class="text-gray-700 mb-4">2. Monitor status NTP Server:<br>
+                                /system ntp server monitor</p>
+                                
+                                <p class="text-gray-700 mb-4">3. Periksa log sistem untuk masalah NTP:<br>
+                                /log print where message~"NTP"</p>
+                                
+                                <p class="text-gray-700 mb-4">Dengan langkah-langkah ini, administrator dapat memastikan bahwa layanan NTP berjalan optimal dan melakukan tindakan korektif jika diperlukan.</p>
+                                
+                                                                                                <img src="https://files.catbox.moe/nvp9m8.jpg" alt="ip address" class="section-image">
+
+
+<p class="text-gray-700 mb-4 text-sm">gambar 7
+
+<p class="text-gray-700 mb-4 text-sm">Sumber foto: m adlan ali</p>
+                                
+                                
+                                
+                                
+                            </div>
+                                                <div class="bg-white rounded-lg shadow-md p-6 hover-scale">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">DAFTAR PUSTAKA</h3>
+                        <p class="text-gray-700 mb-4">MikroTik Documentation. NTP. https://help.mikrotik.com/docs/display/ROS/NTP diakses pada 16 September 2025 pukul 19.06 WIB.</p>
+
+                        <p class="text-gray-700 mb-4">Tech@Layer-x. Panduan Konfigurasi NTP MikroTik. https://tech.layer-x.com/ntp-mikrotik diakses pada 16 September 2025 pukul 19.06 WIB.</p>
+
+                        <p class="text-gray-700 mb-4">Microsoft. Pengaturan Waktu di Windows. https://support.microsoft.com/id-id/windows diakses pada 16 September 2025 pukul 19.07 WIB.</p>
+
+                        <p class="text-gray-700 mb-4">Hostinger. Mengatur Zona Waktu di Ubuntu. https://www.hostinger.co.id/tutorial/ubuntu-zona-waktu diakses pada 16 September 2025 pukul 19.07 WIB.</p>
+
+                        <p class="text-gray-700 mb-4">MikroTik Forum. Troubleshooting NTP. https://forum.mikrotik.com/viewtopic.php?t=185432 diakses pada 16 September 2025 pukul 19.07 WIB.</p>
+
+                        <p class="text-gray-700 mb-4">NetworkLessons. Understanding NTP. https://networklessons.com/ntp diakses pada 16 September 2025 pukul 19.08 WIB.</p>
+
+                        <p class="text-gray-700 mb-4">GeeksforGeeks. Network Time Protocol. https://www.geeksforgeeks.org/network-time-protocol-ntp diakses pada 16 September 2025 pukul 19.08 WIB.</p>
+
+
+<p class="text-gray-700 mb-4">Cisco. NTP Best Practices. https://www.cisco.com/c/en/us/support/docs/availability/high-availability/19643-ntpm.html diakses pada 16 September 2025 pukul 19.09 WIB.</p>
+
+<p class="text-gray-700 mb-4">Juniper Networks. NTP Configuration Guide. https://www.juniper.net/documentation/us/en/software/junos/ntp/topics/topic-map/ntp-configuration.html diakses pada 16 September 2025 pukul 19.09 WIB.</p>
+
+<p class="text-gray-700 mb-4">NTP.org. Official NTP Documentation. https://www.ntp.org/documentation.html diakses pada 16 September 2025 pukul 19.10 WIB.</p>
+
+
+<p class="text-gray-700 mb-4">IBM. NTP Troubleshooting. https://www.ibm.com/docs/en/linux?topic=problems-ntp-troubleshooting diakses pada 16 September 2025 pukul 19.10 WIB.</p>
+
+<p class="text-gray-700 mb-4">TechTarget. Network Time Protocol (NTP). https://www.techtarget.com/whatis/definition/Network-Time-Protocol-NTP diakses pada 16 September 2025 pukul 19.10 WIB.</p>
+
+<p class="text-gray-700 mb-4">Wikipedia. Network Time Protocol. https://en.wikipedia.org/wiki/Network_Time_Protocol diakses pada 16 September 2025 pukul 19.11 WIB.</p>
+
+                    </div>
+                        
+                    </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                                <p class="text-blue-800 font-medium">Sekian dari saya M Adlan Ali S. Terima kasih atas perhatiannya. Wassalamualaikum wr.wb</p>
+                            </div>
+                        
+                        <div class="border-t border-gray-200 pt-6 mt-6">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <a href="#" class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-gray-200 transition">#Tugas</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-gray-200 transition">#TKJ</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-gray-200 transition">#Jaringan</a>
+                                <a href="#" class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm hover:bg-gray-200 transition">#Laporan</a>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div class="flex space-x-4">
+                                    <button class="flex items-center text-gray-500 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                        </svg>
+                                        <span>24</span>
+                                    </button>
+                                    <button class="flex items-center text-gray-500 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                        </svg>
+                                        <span>5</span>
+                                    </button>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                                        </svg>
+                                    </button>
+                                    <button class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z" />
+                                        </svg>
+                                    </button>
+                                    <button class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Sidebar -->
+                <aside class="lg:w-1/3 space-y-6">
+                    <!-- About Widget -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover-scale">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Tentang TKJ DBonejo</h3>
+                        <img src="https://files.catbox.moe/ez8k4a.png" alt="TKJ DBonejo" class="w-full h-auto rounded mb-4">
+                        <p class="text-gray-700 mb-4">Blog ini berisi materi-materi praktikum untuk kelas XI TKJ 3</p>
+                        <a href="https://s.id/info-xitjktiii" class="external-link" target="_blank">XI TKJ 3</a>
+                    </div>
+                    
+                    <!-- Categories -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover-scale">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Kategori</h3>
+                        <div class="space-y-2">
+                            <a href="#" class="flex justify-between items-center py-2 px-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                <span class="text-gray-800">Tugas</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">12</span>
+                            </a>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                <span class="text-gray-800">Tutorial</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">8</span>
+                            </a>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                <span class="text-gray-800">Materi</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">5</span>
+                            </a>
+                            <a href="#" class="flex justify-between items-center py-2 px-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                <span class="text-gray-800">Laporan</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">7</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+              
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">TKJ DBonejo</h3>
+                        <p class="text-gray-400">Blog pembelajaran Teknik Komputer dan Jaringan untuk siswa SMK.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Tautan Cepat</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Beranda</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Tugas</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Tutorial</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Kontak</h3>
+                        <ul class="space-y-2 text-gray-400">
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                alamalan728@gmail.com
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                +62 812-4986-4586
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; 2025 M Adlan Ali S. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+         <script>
+        // Simulate loading progress
+        document.addEventListener('DOMContentLoaded', function() {
+            let progress = 0;
+            const progressBar = document.getElementById('progress');
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            mainContent.style.opacity = '1';
+                        }, 500);
+                    }, 500);
+                }
+            }, 200);
+            
+            // Add hover effect to all hover-scale elements
+            document.querySelectorAll('.hover-scale').forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.03)';
+                });
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+    </body>
+    </html>
